@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Tollgate",
-    "slug": "Tollgate",
+    "name": "CommunityNoticeboard",
+    "slug": "CommunityNoticeboard",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -31,7 +31,7 @@ const ForgetPassword = ({navigation}) => {
                     </View>
                     <ScrollView>
                     <View style={{alignItems:'center',}}>
-                        <Image source={require('../images/toll_gate3.jpg')} style={{width:250,height:250,
+                        <Image source={require('../images/communityIcon.png')} style={{width:250,height:250,
                        borderRadius:30 }}/>
                     </View>
         <View style={styles.inputContainer}>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         width:50,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#4A1DD6',
+        backgroundColor:'#006400',
         height:'100%',
         borderRadius:30,
         alignSelf:'center',
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         
     },
     signupText:{
-        color:'#4A1DD6',
+        color:'#006400',
         marginRight:40,
     }
 

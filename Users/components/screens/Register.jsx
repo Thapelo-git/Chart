@@ -68,7 +68,7 @@ const Register = ({navigation}) => {
                 </View>
                 <ScrollView>
                 <View style={{alignItems:'center',marginTop:5}}>
-                    <Image source={require('../images/toll_gate3.jpg')} style={{width:250,height:80,
+                    <Image source={require('../images/communityIcon.png')} style={{width:150,height:80,
                    borderRadius:30 }}/>
                 </View>
                 <Formik
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
         width:50,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#4A1DD6',
+        backgroundColor:'#006400',
         height:'100%',
         borderRadius:30,
         alignSelf:'center',
