@@ -87,36 +87,33 @@ const HomeScreen = ({ navigation }) => {
     const bottomopen = useRef()
     const [modalopen,setModalopen]=useState(false)
     const [ selectedBtnIndex,setSelectedBtnIndex] = useState(0);
-    
+    const markcategory=(key,vehicleType)=>{
+        setSelectedBtnIndex(key)
+   
+        
+       }
+    const Vehicle =[
+        {id:'1',vehicleType:'Warnings',image_:require('../images/car.png')},
+        {id:'2',vehicleType:'Emergency Assembly',image_:require('../images/truck.jpg')},
+        {id:'3',vehicleType:'Death/burials',image_:require('../images/motorcycle.jpg')},
+        {id:'4',vehicleType:'Festivals',image_:require('../images/bike.png')},
+        
+      ]
     const Card = ({ Tollgate, index }) => {
         return (
-            <TouchableOpacity 
-            onPress={() => navigation.navigate('HotelDetails', {
-                data: Tollgate, index: index,
-                phonenumber: phonenumber
-            })}
-            >
-                <View style={styles.cardContainer}>
-                    <Image style={styles.cardImage} source={{ uri: Tollgate.url }} />
-                    <View style={{ height: 100, alignItems: 'center' }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 18, color: 'gray', }}>Name: </Text>
-                            <Text style={{ fontSize: 20, color: 'blue', }}>{Tollgate.name}</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 18, color: 'gray', }}>Route: </Text>
-                            <Text style={{ fontSize: 20, color: 'gray', }}>{Tollgate.Route}</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 18, color: 'gray', }}>Road: </Text>
-                            <Text style={{ fontSize: 18, color: 'gray', }}>{Tollgate.Road}</Text>
-                        </View>
-  
-                    </View>
-  
-                </View>
-            </TouchableOpacity>)
+            <TouchableOpacity key={index} activeOpacity={0.8}
+        onPress={()=> markcategory(index,Tollgate.vehicleType,)} 
+        
+        >
+                <View style={{width:130,height:45,borderColor:selectedBtnIndex == index?'#006400':'gainsboro',justifyContent:'center',
+        alignItems:'center',borderWidth:1}} 
+     >
+              <Text style={{color:selectedBtnIndex == index?'#006400':'gainsboro',fontWeight:'bold'}}>{Tollgate.vehicleType}</Text>
+              </View>
+          </TouchableOpacity>
+            )
     }
+    const [page,setPage]=useState(0)
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fff',padding:10}}>
             <StatusBar
@@ -143,46 +140,16 @@ const HomeScreen = ({ navigation }) => {
                
             </View>
             
-            <View style={{
-                marginTop: 20,
-                flexDirection: 'row',
-                paddingHorizontal: 20,
-            }}>
-                <TouchableOpacity style={styles.inputContainer}
-                onPress={()=>bottomopen.current.show()}>
-
-                    <Ionicons name="search" size={24} />
-
-                    <View
-                        style={{ fontSize: 18, flex: 1, marginLeft: 10 }}
-                        ><Text>Search by Name</Text></View>
-                       
-                  
-                </TouchableOpacity>
-            </View>
-        
+            
             <View>
             <View style={{ paddingVertical: 20 }}>
 
-<Text style={styles.titles}>Select Your Destination</Text>
-
-<Picker
-  selectedValue={RouteContainer}
-  style={{width:300,height:50,backgroundColor:'#eee'}}
-  onValueChange={(value, id) => { FilterFunction(value) }}
->
-  <Picker.Item label="select" value="" />
-  <Picker.Item label="PLK To JHB" value="N1" />
-  <Picker.Item label="JHB To Dur" value="N3" />
-  {/* <Picker.Item label="JHB To CP" value="N2" /> */}
-  
-</Picker>
 <FlatList
                 keyExtractor={(_, key) => key.toString()}
-                vertical
-                showsVerticalScrollIndicator={false}
+                horizontal
+                
                 contentContainerStyle={{ paddingLeft: 20 }}
-                data={Route}
+                data={Vehicle}
                 renderItem={({ item, index }) => <Card Tollgate={item} index={index} />}
             />
 

@@ -65,7 +65,9 @@ const Login = ({navigation}) => {
                 <View style={{alignItems:'center',marginTop:5}}>
                     <Image source={require('../images/communityIcon.png')} style={{width:250,height:180,
                    borderRadius:30 }}/>
+                   <Text>Together we can do more</Text>
                 </View>
+              
                 <Formik 
         initialValues={{email:'',password:''}}
         validationSchema={ReviewSchem}

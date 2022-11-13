@@ -12,23 +12,23 @@ const Register = ({navigation}) => {
     const [isPasswordShow,setPasswordShow]=useState(false)
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
     const ReviewSchem=yup.object({
-        name:yup.string().required().min(2),
-        phonenumber:yup.string().matches(phoneRegExp,'Phone number is not valid'),
+        Address:yup.string().required().min(2),
+        PostalCode:yup.number().required(),
         email:yup.string().required().min(6),
         password:yup.string().required().min(6),
         confirmpassword:yup.string().required().min(6).oneOf([yup.ref('password'),null],'password does not match')
     })
     const addUser= async (data)=>{
         try{
-          const {uid,email,password,name,phonenumber} =data
+          const {uid,email,password,Address,PostalCode} =data
   await auth.createUserWithEmailAndPassword(
       email.trim().toLowerCase(),password
     ).then(res =>{
        
           db.ref(`/users`).child(res.user.uid).set({
-            name:name,
+            Address:Address,
             email:email.trim().toLowerCase(),
-            phonenumber:phonenumber,
+            PostalCode:PostalCode,
             uid:res.user.uid
           })
           res.user.sendEmailVerification()
@@ -72,7 +72,7 @@ const Register = ({navigation}) => {
                    borderRadius:30 }}/>
                 </View>
                 <Formik
-        initialValues={{name:'',phonenumber:'',email:'',password:'',confirmpassword:''}}
+        initialValues={{Address:'',PostalCode:'',email:'',password:'',confirmpassword:''}}
         validationSchema={ReviewSchem}
         onSubmit={(values,action)=>{
             action.resetForm()
@@ -92,32 +92,32 @@ const Register = ({navigation}) => {
         </View>
             <TextInput
              style={styles.inputs}
-             placeholder='Enter Last Name'
-             onChangeText={props.handleChange('name')}
-             value={props.values.name}
-             onBlur={props.handleBlur('name')}
+             placeholder='Enter your Address'
+             onChangeText={props.handleChange('Address')}
+             value={props.values.Address}
+             onBlur={props.handleBlur('Address')}
              />
         
         </View>
-        <Text style={{color:'red',marginTop:-10}}>{props.touched.name && props.errors.name}</Text>
+        <Text style={{color:'red',marginTop:-10}}>{props.touched.Address && props.errors.Address}</Text>
                  <View style={styles.inputContainer}>
         <View style={styles.inputIconView}>
-            <Icon name='phone'
+        <FontAwesome name='user'
             style={{color:'#fff',textAlign:'center',
         fontSize:18}}
             />
         </View>
             <TextInput
              style={styles.inputs}
-             placeholder='Enter Phone Number'
+             placeholder='Enter Post Code'
              keyboardType='numeric'
-             onChangeText={props.handleChange('phonenumber')}
-             value={props.values.phonenumber}
-             onBlur={props.handleBlur('phonenumber')}
+             onChangeText={props.handleChange('PostalCode')}
+             value={props.values.PostalCode}
+             onBlur={props.handleBlur('PostalCode')}
              />
         
         </View>
-        <Text style={{color:'red',marginTop:-15}}>{props.touched.phonenumber && props.errors.phonenumber}</Text>
+        <Text style={{color:'red',marginTop:-15}}>{props.touched.PostalCode && props.errors.PostalCode}</Text>
         <View style={styles.inputContainer}>
         <View style={styles.inputIconView}>
             <Icon name='email'
